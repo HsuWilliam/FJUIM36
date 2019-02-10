@@ -26,6 +26,27 @@ if($_SESSION['id']!=null){
   $row = mysqli_fetch_row($result);
 }
 
+
+$passwd = @$_POST['passwd'];
+
+if(isset($_POST['modify']) ){
+  if($_SESSION['id']!=null){
+    $id3 = $_SESSION['id'];
+    $passwd = md5($passwd);
+    //update the new datas to database
+    $sql2 = "UPDATE table_test SET password= '$passwd', wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}' where id='$id3'";
+  
+    if(mysqli_query($conn, $sql2)){
+      echo "<script type='text/javascript'>alert('修改完成'); location.href='account.php'</script>";
+    }else{
+      echo "Error: " . $sql2 . "<br>" . mysqli_error($conn);
+    }
+  }
+  
+}
+ 
+
+
 ?>
 
 
@@ -71,7 +92,7 @@ if($_SESSION['id']!=null){
           <ul class="nav justify-content-end navbar-nav ml-auto">
           <li class="nav-item active">
           <?php  if (isset($_SESSION['id'])) : ?>
-              <a class="nav-link ecolor" href="#"><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
+              <a class="nav-link ecolor" href="account.php"><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
             <?php endif ?>
             </li>
             <li class="nav-item active">
@@ -87,8 +108,7 @@ if($_SESSION['id']!=null){
         </div>
       </div>
     </nav>
- 
-   <div class="container mt-3">
+    <div class="container mt-3">
     </div>
     <div class="row top">
         <div class="col-12">
@@ -97,27 +117,58 @@ if($_SESSION['id']!=null){
     <div class="container">
       <div class="row text-center">
         <div class="col-12">
-    <div class="card text-center">
+        <div class="card text-center">
   <div class="card-header">
   </div>
   
       <div class="card-footer text-muted">
-    <p class="card-text" style="font-size:30px">會員資料</p>
-    <p class="card-text"><?php  if (isset($_SESSION['id'])) : ?>
-    身分證字號:<strong><?php echo $_SESSION['id']; ?></strong><?php endif ?></p>
-
-    <p class="card-text">姓名: <strong><?php echo "$row[2]";?></strong></p>
-    <p class="card-text">E-mail:<strong><?php echo "$row[4]";?></strong></p>
-    <p class="card-text">電子錢包:<strong><?php echo "$row[5]";?></strong></p>
-    <p class="card-text">手機號碼:<strong><?php echo "$row[6]";?></strong></p>
-    <a href="modifyac.php" class="btn btn-primary">修改資料與密碼</a>
+    <p class="card-text" style="font-size:30px">修改資料</p>
+    <p class="card-text" style="font-size:20px"><span style="color:red;">※若特定資料不需修改，則保留原表格之內容，並按下確認鍵即可!</span></p>
+    <form method="post" action="modifyac.php">
+  <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2 col-form-label">姓名</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="name" value=<?php echo "$row[2]";?>>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2 col-form-label">新密碼</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" name="passwd" value=<?php echo "$row[3]";?>>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2 col-form-label">確認新密碼</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" name="confirmpasswd" value=<?php echo "$row[3]";?> >
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10"> 
+      <input type="email" class="form-control" name="email" value=<?php echo "$row[4]";?> >
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2 col-form-label">電子錢包</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="wallet" value=<?php echo "$row[5]";?>>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2 col-form-label">手機號碼</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="phone" value=<?php echo "$row[6]";?>>
+    </div>
+  </div>
+  <button type="submit" name="modify" class="btn">確認修改</button>
+</form>
   </div>
 </div>
 </div>
 </div>
 </div>
-    
-<hr>
+
 
 <div class="container text-white bg-dark p-4">
   <div class="row">
