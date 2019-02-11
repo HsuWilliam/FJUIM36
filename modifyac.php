@@ -30,7 +30,7 @@ if($_SESSION['id']!=null){
 $passwd = @$_POST['passwd'];
 if(isset($_POST['modify']) ){
     if($_SESSION['id']!=null){
-      if($passwd == $row[3]){
+      if($passwd == $row[3]){ //密碼相同
         $id3 = $_SESSION['id'];
       //update the new datas to database
       $sql2 = "UPDATE table_test SET wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}' where id='$id3'";
@@ -40,11 +40,11 @@ if(isset($_POST['modify']) ){
       }else{
         echo "Error: " . $sql2 . "<br>" . mysqli_error($conn);
       }
-      }else{
+      }else{ //修改過密碼
         $id4 = $_SESSION['id'];
         $passwd = md5($passwd);
       //update the new datas to database
-      $sql2 = "UPDATE table_test SET password= '$passwd', wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}' where id='$id4'";
+        $sql2 = "UPDATE table_test SET password= '$passwd', wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}' where id='$id4'";
     
       if(mysqli_query($conn, $sql2)){
         echo "<script type='text/javascript'>alert('修改完成'); location.href='account.php'</script>";
