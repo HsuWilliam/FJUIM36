@@ -19,7 +19,12 @@ if (isset($_GET['logout'])) {
     header("location: index.php");
 }
 
-
+if($_SESSION['id']!=null){
+  $id2 = $_SESSION['id'];
+  $sql = "SELECT * FROM table_test where id='$id2'";
+  $result = mysqli_query($conn,$sql);
+  $row = mysqli_fetch_row($result);
+}
 ?>
 
 
@@ -59,13 +64,13 @@ if (isset($_GET['logout'])) {
               <a class="nav-link ecolor bcr" href="#">　二手票券　</a>
             </li>
             <li class="nav-item active white">
-              <a class="nav-link ecolor bcr" href="#">　常見問題　</a>
+              <a class="nav-link ecolor bcr" >　常見問題　</a>
             </li>
           </ul>
           <ul class="nav justify-content-end navbar-nav ml-auto">
           <li class="nav-item active">
           <?php  if (isset($_SESSION['id'])) : ?>
-              <a class="nav-link ecolor" href="account.php"><strong><?php echo $_SESSION['id']; ?></strong> <span class="sr-only">(current)</span></a>
+              <a class="nav-link ecolor" href="account.php"><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
             <?php endif ?>
             </li>
             <li class="nav-item active">
