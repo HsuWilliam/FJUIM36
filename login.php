@@ -26,6 +26,15 @@
         if(empty($passwd)){
             array_push($errors,"密碼為必填");
         }
+
+      $sql = "SELECT * FROM table_test WHERE id='$id'";
+      $res = mysqli_query($conn,$sql);
+      $row = mysqli_fetch_row($res);
+      if($row[1]==null){
+        array_push($errors,"帳號不存在");
+      }
+
+      
         if(count($errors) == 0){
             $passwd = md5($passwd);
             $query = "SELECT * FROM table_test WHERE id='$id' AND password='$passwd'";
