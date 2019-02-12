@@ -78,6 +78,9 @@
   	<p>
   		Not yet a member? <a href="register.php">Sign up</a>
   	</p>
+    <p>
+  		<a href="#">忘記密碼</a>
+  	</p>
   </form>
 </body>
 </html>
