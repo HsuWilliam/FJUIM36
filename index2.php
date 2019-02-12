@@ -5,11 +5,16 @@
    $username = "root";
    $password = "";
    $dbname = "db_test";
+   $dbname2 = "eticket";
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+  $conn = mysqli_connect($servername, $username, $password, $dbname);
+  $conn2 = mysqli_connect($servername,$username, $password, $dbname2);
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
+}
+if (!$conn2) {
+  die("Connection failed: " . mysqli_connect_error());
 }
 session_start();
 
@@ -25,6 +30,14 @@ if($_SESSION['id']!=null){
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_row($result);
 }
+
+$res = mysqli_query($conn2,"SELECT * FROM images where id=1" );
+$imgrow = mysqli_fetch_array($res);
+$res2 = mysqli_query($conn2,"SELECT * FROM images where id=2" );
+$imgrow2 = mysqli_fetch_array($res2);
+$res3 = mysqli_query($conn2,"SELECT * FROM images where id=3" );
+$imgrow3 = mysqli_fetch_array($res3);
+
 ?>
 
 
@@ -98,21 +111,21 @@ if($_SESSION['id']!=null){
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="images/1920x500.gif" alt="First slide">
+                <img class="d-block w-100" src="<?php echo $imgrow["img-dir"]; ?>" height="400" width="1500" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
                   <h5>Item 1 Heading</h5>
                   <p>Item 1 Description</p>
                 </div>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="images/1920x500.gif" alt="Second slide">
+                <img class="d-block w-100" src="<?php echo $imgrow2["img-dir"]; ?>" height="400" width="1500" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
                   <h5>Item 2 Heading</h5>
                   <p>Item 2 Description</p>
                 </div>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="images/1920x500.gif" alt="Third slide">
+                <img class="d-block w-100" src="<?php echo $imgrow3["img-dir"]; ?>" height="400" width="1500" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
                   <h5>Item 3 Heading</h5>
                   <p>Item 3 Description</p>
