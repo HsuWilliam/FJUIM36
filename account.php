@@ -71,11 +71,11 @@ if($_SESSION['id']!=null){
           <ul class="nav justify-content-end navbar-nav ml-auto">
           <li class="nav-item active">
           <?php  if (isset($_SESSION['id'])) : ?>
-              <a class="nav-link ecolor" href="#"><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
+          <a class="nav-link ecolor" href="account.php"><img src="images/user.png" width="25" height="25" class="d-inline-block align-top" alt=""><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
             <?php endif ?>
             </li>
             <li class="nav-item active">
-              <a class="nav-link ecolor" href="introduce.php"><img src="images/new-user.png" width="25" height="25" class="d-inline-block align-top" alt="">註冊 <span class="sr-only">(current)</span></a>
+            <a class="nav-link ecolor" href="#"><img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt="">訂單 <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link ecolor" href="index.php?logout='1'"><img src="images/sign-in.png" width="25" height="25" class="d-inline-block align-top" alt="">登出 </a>

@@ -22,6 +22,7 @@ $confirmpassword = @$_POST['confirmpassword'];
 $wallet = @$_POST['wallet'];
 $email = @$_POST['email'];
 $name = @$_POST['name'];
+$phone = @$_POST['phone'];
 
 //if the register button is clicked
 if(isset($_POST['register'])){
@@ -31,6 +32,7 @@ if(isset($_POST['register'])){
     $confirmpassword = mysqli_real_escape_string($conn, $_POST['confirmpassword']);
     $wallet = mysqli_real_escape_string($conn,$_POST['wallet']);
     $name = mysqli_real_escape_string($conn,$_POST['name']);
+    $phone = mysqli_real_escape_string($conn,$_POST['phone']);
 
     if(empty($id)){
         array_push($errors,"身分證字號為必填");
@@ -42,10 +44,13 @@ if(isset($_POST['register'])){
         array_push($errors,"電子錢包地址為必填");
     }
     if(empty($name)){
-        array_push($errors,"姓名為必填");
+        array_push($errors,"中文姓名為必填");
     }
     if(empty($email)){
         array_push($errors,"email為必填");
+    }
+    if(empty($phone)){
+        array_push($errors,"手機號碼為必填");
     }
     if($passwd != $confirmpassword){
         array_push($errors,"密碼不相同");
@@ -71,7 +76,7 @@ if(isset($_POST['register'])){
 if(isset($_POST['register'])){
 if(count($errors)==0){
 $passwd = md5($passwd);  //encrypt the password before saving in the database
-$sql = "INSERT INTO table_test (name, id, password ,wallet, email) VALUES ('$name', '$id', '$passwd' , '$wallet', '$email')";
+$sql = "INSERT INTO table_test (name, id, password ,wallet, email, phone) VALUES ('$name', '$id', '$passwd' , '$wallet', '$email','$phone')";
 //if ($passwd == $confirmpassword) {
     if (mysqli_query($conn, $sql)) {
         echo "<script type='text/javascript'>alert('完成註冊'); location.href='login.php'</script>";
@@ -115,12 +120,16 @@ mysqli_close($conn);
             <input type="text" name="wallet" value="<?php echo $wallet; ?>">
         </div>
         <div class="input-group">
-            <label>姓名</label>
+            <label>中文姓名</label>
             <input type="text" name="name" value="<?php echo $name; ?>">
         </div>
         <div class="input-group">
             <label>Email</label>
             <input type="email" name="email" value="<?php echo $email; ?>">
+        </div>
+        <div class="input-group">
+            <label>手機號碼</label>
+            <input type="text" name="phone" value="<?php echo $phone; ?>">
         </div>
         <div class="input-group">
             <button type="submit" name="register" class="btn">Register</button>
