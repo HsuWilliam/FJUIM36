@@ -4,15 +4,15 @@
    $servername = "localhost";
    $username = "root";
    $password = "";
-   $dbname = "db_test";
+   //$dbname = "db_test";
    $dbname2 = "eticket";
 // Create connection
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
+ // $conn = mysqli_connect($servername, $username, $password, $dbname);
   $conn2 = mysqli_connect($servername,$username, $password, $dbname2);
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+//if (!$conn) {
+   // die("Connection failed: " . mysqli_connect_error());
+//}
 if (!$conn2) {
   die("Connection failed: " . mysqli_connect_error());
 }
@@ -26,8 +26,8 @@ if (isset($_GET['logout'])) {
 
 if($_SESSION['id']!=null){
   $id2 = $_SESSION['id'];
-  $sql = "SELECT * FROM table_test where id='$id2'";
-  $result = mysqli_query($conn,$sql);
+  $sql = "SELECT * FROM user where id='$id2'";
+  $result = mysqli_query($conn2,$sql);
   $row = mysqli_fetch_row($result);
 }
 
@@ -83,7 +83,7 @@ $imgrow3 = mysqli_fetch_array($res3);
           <ul class="nav justify-content-end navbar-nav ml-auto">
             <li class="nav-item active">
             <?php  if (isset($_SESSION['id'])) : ?>
-              <a class="nav-link ecolor" href="account.php"><img src="images/user.png" width="25" height="25" class="d-inline-block align-top" alt=""><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
+              <a class="nav-link ecolor" href="account.php"><img src="images/user.png" width="25" height="25" class="d-inline-block align-top" alt=""><strong><?php echo "$row[3]" ?></strong><span class="sr-only">(current)</span></a>
             <?php endif ?>
             </li>
             <li class="nav-item active">

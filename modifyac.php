@@ -4,7 +4,7 @@
    $servername = "localhost";
    $username = "root";
    $password = "";
-   $dbname = "db_test";
+   $dbname = "eticket";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
@@ -21,7 +21,7 @@ if (isset($_GET['logout'])) {
 
 if($_SESSION['id']!=null){
   $id2 = $_SESSION['id'];
-  $sql = "SELECT * FROM table_test where id='$id2'";
+  $sql = "SELECT * FROM user where id='$id2'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_row($result);
 }
@@ -30,10 +30,10 @@ if($_SESSION['id']!=null){
 $passwd = @$_POST['passwd'];
 if(isset($_POST['modify']) ){
     if($_SESSION['id']!=null){
-      if($passwd == $row[3]){ //密碼相同
+      if($passwd == $row[2]){ //沒修改過密碼
         $id3 = $_SESSION['id'];
       //update the new datas to database
-      $sql2 = "UPDATE table_test SET wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}' where id='$id3'";
+      $sql2 = "UPDATE user SET wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}' ,address='{$_POST['address']}' where id='$id3'";
     
       if(mysqli_query($conn, $sql2)){
         echo "<script type='text/javascript'>alert('修改完成'); location.href='account.php'</script>";
@@ -44,7 +44,7 @@ if(isset($_POST['modify']) ){
         $id4 = $_SESSION['id'];
         $passwd = md5($passwd);
       //update the new datas to database
-        $sql2 = "UPDATE table_test SET password= '$passwd', wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}' where id='$id4'";
+        $sql2 = "UPDATE user SET password= '$passwd', wallet='{$_POST['wallet']}', email='{$_POST['email']}', name='{$_POST['name']}', phone='{$_POST['phone']}',address='{$_POST['address']}' where id='$id4'";
     
       if(mysqli_query($conn, $sql2)){
         echo "<script type='text/javascript'>alert('修改完成'); location.href='account.php'</script>";
@@ -105,7 +105,7 @@ if(isset($_POST['modify']) ){
           <ul class="nav justify-content-end navbar-nav ml-auto">
           <li class="nav-item active">
           <?php  if (isset($_SESSION['id'])) : ?>
-          <a class="nav-link ecolor" href="account.php"><img src="images/user.png" width="25" height="25" class="d-inline-block align-top" alt=""><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
+          <a class="nav-link ecolor" href="account.php"><img src="images/user.png" width="25" height="25" class="d-inline-block align-top" alt=""><strong><?php echo "$row[3]" ?></strong><span class="sr-only">(current)</span></a>
             <?php endif ?>
             </li>
             <li class="nav-item active">
@@ -141,19 +141,19 @@ if(isset($_POST['modify']) ){
   <div class="form-group row">
     <label for="colFormLabel" class="col-sm-2 col-form-label">姓名</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="name" value=<?php echo "$row[2]";?>>
+      <input type="text" class="form-control" name="name" value=<?php echo "$row[3]";?>>
     </div>
   </div>
   <div class="form-group row">
     <label for="colFormLabel" class="col-sm-2 col-form-label">新密碼</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" name="passwd" value=<?php echo "$row[3]";?>>
+      <input type="password" class="form-control" name="passwd" value=<?php echo "$row[2]";?>>
     </div>
   </div>
   <div class="form-group row">
     <label for="colFormLabel" class="col-sm-2 col-form-label">確認新密碼</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" name="confirmpasswd" value=<?php echo "$row[3]";?> >
+      <input type="password" class="form-control" name="confirmpasswd" value=<?php echo "$row[2]";?> >
     </div>
   </div>
   <div class="form-group row">
@@ -169,9 +169,15 @@ if(isset($_POST['modify']) ){
     </div>
   </div>
   <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2 col-form-label">地址</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="address" value=<?php echo "$row[7]";?>>
+    </div>
+  </div>
+  <div class="form-group row">
     <label for="colFormLabel" class="col-sm-2 col-form-label">手機號碼</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="phone" value=<?php echo "$row[6]";?>>
+      <input type="text" class="form-control" name="phone" value=<?php echo "$row[8]";?>>
     </div>
   </div>
   <button type="submit" name="modify" class="btn">確認修改</button>

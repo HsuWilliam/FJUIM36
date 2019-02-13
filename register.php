@@ -6,7 +6,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_test";
+$dbname = "eticket";
 $errors = array();
 
 // Create connection
@@ -23,6 +23,8 @@ $wallet = @$_POST['wallet'];
 $email = @$_POST['email'];
 $name = @$_POST['name'];
 $phone = @$_POST['phone'];
+$address = @$_POST['address'];
+$bday =  @$_POST['bday'];
 
 //if the register button is clicked
 if(isset($_POST['register'])){
@@ -33,6 +35,8 @@ if(isset($_POST['register'])){
     $wallet = mysqli_real_escape_string($conn,$_POST['wallet']);
     $name = mysqli_real_escape_string($conn,$_POST['name']);
     $phone = mysqli_real_escape_string($conn,$_POST['phone']);
+    $address = mysqli_real_escape_string($conn,$_POST['address']);
+    $bday = mysqli_real_escape_string($conn,$_POST['bday']);
 
     if(empty($id)){
         array_push($errors,"身分證字號為必填");
@@ -55,10 +59,16 @@ if(isset($_POST['register'])){
     if($passwd != $confirmpassword){
         array_push($errors,"密碼不相同");
     }
+    if(empty($address)){
+        array_push($errors,"地址為必填");
+    }
+    if(empty($bday)){
+        array_push($errors,"生日為必填");
+    }
 
     
 }
-    $user_check_query = "SELECT * FROM table_test WHERE id='$id' OR email='$email' ";
+    $user_check_query = "SELECT * FROM user WHERE id='$id' OR email='$email' ";
     $result = mysqli_query($conn, $user_check_query);
     $check = mysqli_fetch_assoc($result);
 
@@ -76,7 +86,7 @@ if(isset($_POST['register'])){
 if(isset($_POST['register'])){
 if(count($errors)==0){
 $passwd = md5($passwd);  //encrypt the password before saving in the database
-$sql = "INSERT INTO table_test (name, id, password ,wallet, email, phone) VALUES ('$name', '$id', '$passwd' , '$wallet', '$email','$phone')";
+$sql = "INSERT INTO user (name, id, password ,wallet, email, phone , address ,birthday) VALUES ('$name', '$id', '$passwd' , '$wallet', '$email','$phone', '$address','$bday')";
 //if ($passwd == $confirmpassword) {
     if (mysqli_query($conn, $sql)) {
         echo "<script type='text/javascript'>alert('完成註冊'); location.href='login.php'</script>";
@@ -132,8 +142,16 @@ mysqli_close($conn);
             <input type="text" name="phone" value="<?php echo $phone; ?>">
         </div>
         <div class="input-group">
-            <button type="submit" name="register" class="btn">Register</button>
+            <label>生日</label>
+        <input type="date" name="bday">
         </div>
+        <div class="input-group">
+            <label>住址</label>
+        <input type="text" name="address" >
+        </div>
+        <div class="input-group">
+            <button type="submit" name="register" class="btn">Register</button>
+        </div>        
         <p>
   		Already a member? <a href="login.php">Sign in</a>
     	</p>

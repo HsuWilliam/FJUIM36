@@ -4,7 +4,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "db_test";
+    $dbname = "eticket";
     $errors = array();
 
 
@@ -27,7 +27,7 @@
             array_push($errors,"密碼為必填");
         }
 
-      $sql = "SELECT * FROM table_test WHERE id='$id'";
+      $sql = "SELECT * FROM user WHERE id='$id'";
       $res = mysqli_query($conn,$sql);
       $row = mysqli_fetch_row($res);
       if($row[1]==null){
@@ -37,7 +37,7 @@
       
         if(count($errors) == 0){
             $passwd = md5($passwd);
-            $query = "SELECT * FROM table_test WHERE id='$id' AND password='$passwd'";
+            $query = "SELECT * FROM user WHERE id='$id' AND password='$passwd'";
             $result = mysqli_query($conn,$query);
             if(mysqli_num_rows($result)==1)//log user in
             {
