@@ -4,7 +4,7 @@
    $servername = "localhost";
    $username = "root";
    $password = "";
-   $dbname = "db_test";
+   $dbname = "eticket";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
@@ -21,7 +21,7 @@ if (isset($_GET['logout'])) {
 
 if($_SESSION['id']!=null){
   $id2 = $_SESSION['id'];
-  $sql = "SELECT * FROM table_test where id='$id2'";
+  $sql = "SELECT * FROM user where id='$id2'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_row($result);
 }
@@ -71,7 +71,7 @@ if($_SESSION['id']!=null){
           <ul class="nav justify-content-end navbar-nav ml-auto">
           <li class="nav-item active">
           <?php  if (isset($_SESSION['id'])) : ?>
-          <a class="nav-link ecolor" href="account.php"><img src="images/user.png" width="25" height="25" class="d-inline-block align-top" alt=""><strong><?php echo "$row[2]" ?></strong><span class="sr-only">(current)</span></a>
+          <a class="nav-link ecolor" href="account.php"><img src="images/user.png" width="25" height="25" class="d-inline-block align-top" alt=""><strong><?php echo "$row[3]" ?></strong><span class="sr-only">(current)</span></a>
             <?php endif ?>
             </li>
             <li class="nav-item active">
@@ -106,10 +106,12 @@ if($_SESSION['id']!=null){
     <p class="card-text"><?php  if (isset($_SESSION['id'])) : ?>
     身分證字號:<strong><?php echo $_SESSION['id']; ?></strong><?php endif ?></p>
 
-    <p class="card-text">姓名: <strong><?php echo "$row[2]";?></strong></p>
+    <p class="card-text">姓名: <strong><?php echo "$row[3]";?></strong></p>
     <p class="card-text">E-mail:<strong><?php echo "$row[4]";?></strong></p>
     <p class="card-text">電子錢包:<strong><?php echo "$row[5]";?></strong></p>
-    <p class="card-text">手機號碼:<strong><?php echo "$row[6]";?></strong></p>
+    <p class="card-text">生日:<strong><?php echo "$row[6]";?></strong></p>
+    <p class="card-text">地址:<strong><?php echo "$row[7]";?></strong></p>
+    <p class="card-text">手機號碼:<strong><?php echo "$row[8]";?></strong></p>
     <a href="modifyac.php" class="btn btn-primary">修改資料與密碼</a>
   </div>
 </div>
