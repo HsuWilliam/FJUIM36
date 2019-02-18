@@ -23,13 +23,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['id']);
     header("location: index.php");
 }
-$res = mysqli_query($conn2,"SELECT * FROM images where id=1" );
+$res = mysqli_query($conn2,"SELECT * FROM program where prog_id=1" );
 $row = mysqli_fetch_array($res);
-$res2 = mysqli_query($conn2,"SELECT * FROM images where id=2" );
+$res2 = mysqli_query($conn2,"SELECT * FROM program where prog_id=2" );
 $row2 = mysqli_fetch_array($res2);
-$res3 = mysqli_query($conn2,"SELECT * FROM images where id=3" );
+$res3 = mysqli_query($conn2,"SELECT * FROM program where prog_id=3" );
 $row3 = mysqli_fetch_array($res3);
-
+$res4 = mysqli_query($conn2,"SELECT * FROM program where prog_id=4");
+$row4 = mysqli_fetch_array($res4);
 
 
 ?>
@@ -101,29 +102,38 @@ $row3 = mysqli_fetch_array($res3);
               <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleControls" data-slide-to="1"></li>
               <li data-target="#carouselExampleControls" data-slide-to="2"></li>
+              <li data-target="#carouselExampleControls" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="<?php echo $row["img-dir"]; ?>" height="400" width="1500" alt="First slide">
+                <img class="d-block w-100" src="<?php echo $row["img"]; ?>" height="400" width="1500" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                  <h5>Item 1 Heading</h5>
-                  <p>Item 1 Description</p>
+                  <h5></h5>
+                  <p></p>
                 </div>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="<?php echo $row2["img-dir"]; ?>" height="400" width="1500" alt="Second slide">
+                <img class="d-block w-100" src="<?php echo $row2["img"]; ?>" height="400" width="1500" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                  <h5>Item 2 Heading</h5>
-                  <p>Item 2 Description</p>
+                  <h5></h5>
+                  <p></p>
                 </div>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="<?php echo $row3["img-dir"]; ?>" height="400" width="1500" alt="Third slide">
+                <img class="d-block w-100" src="<?php echo $row3["img"]; ?>" height="400" width="1500" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
-                  <h5>Item 3 Heading</h5>
-                  <p>Item 3 Description</p>
+                  <h5></h5>
+                  <p></p>
                 </div>
               </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="<?php echo $row4["img"]; ?>" height="400" width="1500" alt="fourth slide">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5></h5>
+                  <p></p>
+                </div>
+              </div>
+
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -182,12 +192,12 @@ $row3 = mysqli_fetch_array($res3);
       <div class="row text-center">
         <div class="col-md-4 pb-1 pb-md-0">
           <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+            <img class="card-img-top" src="<?php echo $row["img"]; ?>" height="180" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+     
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -198,12 +208,12 @@ $row3 = mysqli_fetch_array($res3);
         </div>
         <div class="col-md-4 pb-1 pb-md-0">
           <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+            <img class="card-img-top" src="<?php echo $row2["img"]; ?>" height="180" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+           
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -214,12 +224,12 @@ $row3 = mysqli_fetch_array($res3);
         </div>
         <div class="col-md-4 pb-1 pb-md-0">
           <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+            <img class="card-img-top" src="<?php echo $row3["img"]; ?>" height="180" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -232,12 +242,12 @@ $row3 = mysqli_fetch_array($res3);
       <div class="row text-center mt-4">
         <div class="col-md-4 pb-1 pb-md-0">
           <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+            <img class="card-img-top" src="<?php echo $row4["img"]; ?>" height="180" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -250,10 +260,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -266,10 +276,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -288,10 +298,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -304,10 +314,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -320,10 +330,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -338,10 +348,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -354,10 +364,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+           
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -370,10 +380,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -392,10 +402,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -408,10 +418,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+           
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -424,10 +434,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+           
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -442,10 +452,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -458,10 +468,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+           
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -474,10 +484,10 @@ $row3 = mysqli_fetch_array($res3);
           <div class="card">
             <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
             <div class="card-body">
-            <a href="#">
+            
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </a>
+            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
               <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
@@ -536,7 +546,7 @@ $row3 = mysqli_fetch_array($res3);
             <abbr title="Phone">P:</abbr> (123) 456-7890
           </address>
           <address>
-            <strong>Full Name</strong><br>
+            <strong>客服信箱</strong><br>
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ETicket@gmail.com">ETicket@gmail.com</a>
           </address>
         </div>
